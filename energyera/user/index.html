@@ -1,0 +1,74 @@
+<html>
+<head></head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('input[name=mode]').change(function(){
+            var i;
+            var val = $(this).val();
+            for (i=1; i <= 4; i++){
+                $('#mode'+i).hide();
+            }
+            $('#mode'+val).show();
+        });
+    });
+</script>
+<h1>Welcome, guest!</h1>
+<h2> Please select query mode </h2>
+<form>
+    <input type="radio" name="mode" value="1"> Energy consumed by companies <br/>
+    <input type="radio" name="mode" value="2"> Resources state owned <br/>
+    <input type="radio" name="mode" value="3"> Energy produced by companies <br/>
+    <input type="radio" name="mode" value="4"> States consume energy more than X <br/>
+</form>
+
+<hr><br/>
+
+<div id="mode1" style="display:none">
+    <form action="user_mode1.php">
+        Companies (split by ',') <input type="text"><br/>
+        that consume
+        <input type="radio" name="etype"> All
+        <input type="radio" name="etype"> Electricity
+        <input type="radio" name="etype"> Heat <br/>
+        from year <input type="text"> to year <input type="text"><br/>
+        <input type="reset"> <input type="submit" value="Find it!">
+    </form>
+</div>
+
+<div id="mode2" style="display:none">
+    <form action="user_mode2.php">
+        State <input type="text"><br/>
+        who owns (split by ',') <input type="text"> <br/>
+        from year <input type="text"> to year <input type="text"><br/>
+        <input type="reset"> <input type="submit" value="Find it!">
+    </form>
+</div>
+
+<div id="mode3" style="display:none">
+    <form action="user_mode3.php">
+        Companies (split by ',') <input type="text"><br/>
+        that produce
+        <input type="radio" name="etype"> Electricity
+        <input type="radio" name="etype"> Heat <br/>
+        from year <input type="text"> to year <input type="text"><br/>
+        <input type="reset"> <input type="submit" value="Find it!">
+    </form>
+</div>
+
+<div id="mode4" style="display:none">
+    <form action="user_mode4.php">
+        Companies located in state <input type="text"><br/>
+        that consume more than <input type="text">
+        <select id="etype">
+            <option value="all"> All </option>
+            <option value="electricity" selected="selected"> Electricity </option>
+            <option value="heat"> Heat </option>
+        </select> <br/>
+        from year <input type="text"> to year <input type="text"><br/>
+        <input type="reset"> <input type="submit" value="Find it!">
+    </form>
+</div>
+</body>
+</html>

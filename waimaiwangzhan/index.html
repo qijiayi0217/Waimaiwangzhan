@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+	<script type="text/javascript">
+	function xzh117(){
+			
+			var allcookie=document.cookie;
+			
+			var check =allcookie.indexOf('userID');
+			
+			if (check!=-1){
+				window.location.href="./post_login_pages/welcome.php";
+			}
+	    }
+	    xzh117();
+	</script>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			console.log("script loaded...");
+			$('#login_button').click(checkpasswd);
+		})
+		var checkpasswd=function(){
+			var $userID=$('#userID').val();
+			var $password=$('#password').val();
+			var $usertype=$('#usertype').val()
+			console.log($userID);
+			console.log($password);
+			console.log($usertype);
+			$.ajax({
+				url: 'http://localhost/waimaiwangzhan/post_login_pages/logincheck.php',
+				data:{
+					userID: $userID,
+					password: $password,
+					usertype: $usertype
+				},
+				type: "POST",
+				dataType: "json",
+				success: function(data){
+					console.log('success!');
+					window.location.href="http://localhost/waimaiwangzhan/post_login_pages/welcome.php";
+				},
+				error: function(data){
+					console.log("error!");
+					console.log(data);
+					$('#password').val('');
+					var response=document.getElementById("response");
+					response.innerHTML="<a style='color:red'>Wrong information!</a>";
+				}
+			});
+		}
+	</script>
+</head>
+<body><br><br><br>
+	<center><div style="border:1px solid white;box-shadow: 10px 0px 10px #888888; width:350px;height:280px;">
+	<h1 style="WIDTH: 200px; color: #FF4500">Login</h1>
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>UserID:</td> 
+		<td><input type="text" name="userID" id="userID"></td>
+			</tr>
+			<tr>
+			<td>Password: </td>
+			<td><input type="password" name="passwd" id="password"></td>
+		</tr>
+		<tr>
+			<td>User Type: </td>
+			<td><select name="type" id="usertype">
+			<option value="Customer">Customer</option>
+			<option value="Restaurant">Restaurant Owner</option>
+		</select></td>
+	 	</tr>
+	 	<tr>
+		<td><button type="button" id="login_button">Submit</button></td>
+	<form><td><button value="Sign up" type=button onclick="javascript:window.location.href='./post_login_pages/sign_up.html'">Sign up</button></form></td>
+</tr>
+</table>
+<div id="response"></div>
+	</div></center>
+</body>
+</html>

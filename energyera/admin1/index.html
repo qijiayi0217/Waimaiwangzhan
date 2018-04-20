@@ -1,0 +1,280 @@
+<html>
+<head></head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<h1> Welcome back, administrator! </h1>
+<h2> Select your action: </h2>
+<form id="act_form">
+    <select id="actions" onchange="reload()">
+        <option value="add"> Add an entry </option>
+        <option value="delete"> Delete an entry </option>
+        <option value="select" selected="selected"> Select some entries </option>
+    </select>
+</form>
+
+<h2> Select table: </h2>
+<form id="table_form" action="show_tables.php">
+    <select id="tables" onchange="reload()">
+        <option value="state" selected="selected"> State </option>
+        <option value="company"> Company </option>
+        <option value="energy"> Energy </option>
+        <option value="resource"> Resources </option>
+        <option value="own"> Own </option>
+        <option value="consume"> Consume </option>
+        <option value="produce"> Produce </option>
+    </select>
+    <input type="submit" value="Show table">
+</form>
+
+<hr><br/>
+
+<div id="dynamic"></div>
+
+<script>
+    function reload() {
+        var act = $('#actions').val();
+        var tables = $('#tables').val();
+
+        var a = ['add', 'delete', 'select'];
+        var t = ['state', 'company', 'energy', 'resource', 'own', 'consume', 'produce'];
+        var i,j;
+        for (i = 0; i < a.length; i++)
+        {
+            for (j = 0; j < t.length; j++)
+            {
+                $('#' + a[i] + '_' + t[j]).hide();
+            }
+        }
+        $('#' + act + '_' + tables).show();
+    }
+
+    $(document).ready(function() {
+        $('#actions').change(reload());
+        $('#tables').change(reload());
+    });
+</script>
+<script> reload() </script>
+
+<!-------- hidden forms: add --------->
+<div id="add_state" style="display:none">
+    <form action="add_state.php">
+        Name: <input type="text"><br />
+        Population: <input type="text"><br />
+        GDP: <input type="text"> <br />
+        <input type="reset">  <input type="submit">
+    </form>
+</div>
+
+<div id="add_company" style="display:none">
+    <form action="add_company.php">
+        Name: <input type="text"><br />
+        Branch: <input type="text"><br />
+        Location: <input type="text"> <br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="add_energy" style="display:none">
+    <form action="add_energy.php">
+        Type: <input type="text"><br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="add_resource" style="display:none">
+    <form action="add_resource.php">
+        Name: <input type="text"><br />
+        Renewable:
+        <input type="radio" name="renewable" value="yes"> Yes
+        <input type="radio" name="renewable" value="no"> No
+        <br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="add_own" style="display:none">
+    <form action="add_own.php">
+        State: <input type="text"><br />
+        Resource: <input type="text"><br />
+        Year: <input type="text"> <br />
+        Amount: <input type="text"> <br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="add_consume" style="display:none">
+    <form action="add_consume.php">
+        Company: <input type="text"><br />
+        Energy type: <input type="text"><br />
+        Year: <input type="text"> <br />
+        Amount: <input type="text"> <br />
+        Usage: <input type="text"> <br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="add_produce" style="display:none">
+    <form action="add_produce.php">
+        Company: <input type="text"><br />
+        Resource: <input type="text"><br />
+        Energy type: <input type="text"> <br />
+        Year: <input type="text"> <br />
+        Amount: <input type="text"> <br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<!-------------- hidden forms: delete ------------->
+<div id="delete_state" style="display:none">
+    <form action="delete_state.php">
+        State name: <input type="text"><br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="delete_company" style="display:none">
+    <form action="delete_company.php">
+        Name: <input type="text"><br />
+        Branch ID: <input type="text"><br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="delete_energy" style="display:none">
+    <form action="delete_energy.php">
+        Name: <input type="text"><br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="delete_resource" style="display:none">
+    <form action="delete_resource.php">
+        Name: <input type="text"><br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="delete_own" style="display:none">
+    <form action="delete_own.php">
+        State: <input type="text"><br/>
+        Resource: <input type="text"><br />
+        Year: <input type="text"><br />
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="delete_consume" style="display:none">
+    <form action="delete_consume.php">
+        Company: <input type="text"><br />
+        Energy: <input type="text"><br />
+        Year: <input type="text"><br/>
+        Usage: <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="delete_produce" style="display:none">
+    <form action="delete_produce.php">
+        Company: <input type="text"><br />
+        Resource: <input type="text"><br />
+        Energy type: <input type="text"><br />
+        Year: <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<!---------- hidden form: select ----------->
+
+<div id="select_state" style="display:none">
+    <strong>State</strong> { Name, Population, GDP } <br/>
+    <br/>
+    <form action="select_state.php">
+        SELECT <input type="text"><br />
+        FROM State <br/>
+        WHERE <input type="text"><br />
+        GROUP BY <input type="text"><br/>
+        HAVING <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="select_company" style="display:none">
+    <strong>Company</strong> { Cname, BranchID, Location }<br/>
+    <br/>
+    <form action="select_company.php">
+        SELECT <input type="text"><br />
+        FROM Company <br/>
+        WHERE <input type="text"><br />
+        GROUP BY <input type="text"><br/>
+        HAVING <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="select_energy" style="display:none">
+    <strong>Energy</strong> { Type }<br/>
+    <br/>
+    <form action="select_energy.php">
+        SELECT <input type="text"><br />
+        FROM Energy <br/>
+        WHERE <input type="text"><br />
+        GROUP BY <input type="text"><br/>
+        HAVING <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="select_resource" style="display:none">
+    <strong>Resources</strong> { Rname, Renewable } <br/>
+    <br/>
+    <form action="select_resource.php">
+        SELECT <input type="text"><br />
+        FROM Resources <br/>
+        WHERE <input type="text"><br />
+        GROUP BY <input type="text"><br/>
+        HAVING <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="select_own" style="display:none">
+    <strong>Own</strong> { Amount, Year, Sname, Rname }<br/>
+    <br/>
+    <form action="select_own.php">
+        SELECT <input type="text"><br />
+        FROM Own <br/>
+        WHERE <input type="text"><br />
+        GROUP BY <input type="text"><br/>
+        HAVING <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="select_consume" style="display:none">
+    <strong>Consume</strong>{ Usage, Year, Amount, Cname }<br/>
+    <br/>
+    <form action="select_consume.php">
+        SELECT <input type="text"><br />
+        FROM Consume <br/>
+        WHERE <input type="text"><br />
+        GROUP BY <input type="text"><br/>
+        HAVING <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+<div id="select_produce" style="display:none">
+    <strong>Produce</strong>{ Amount, Year, Rname, Cname, Etype }<br/>
+    <br/>
+    <form action="select_produce.php">
+        SELECT <input type="text"><br />
+        FROM Produce <br/>
+        WHERE <input type="text"><br />
+        GROUP BY <input type="text"><br/>
+        HAVING <input type="text"><br/>
+        <input type="reset"> <input type="submit">
+    </form>
+</div>
+
+</body>
+</html>

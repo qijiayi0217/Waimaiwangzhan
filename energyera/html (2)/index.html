@@ -1,0 +1,21 @@
+<html>
+<head></head>
+<body>
+<h1> Welcome to ENGERA Database System </h1>
+<h3> Please select your identity below:</h3>
+<a href="user/index.html">I am an user</a><br />
+<a onclick="auth()" href="javascript:void(0);">I am an administrator</a>
+<script>
+    function auth() {
+        var passwd = window.prompt("Please type your password\nhint: admin", "");
+        if (passwd === "admin") {
+            window.location.replace("admin/index.html")
+        }
+        else if (passwd === "" || passwd === null) {}
+        else {
+            window.alert("invalid password!");
+        }
+    }
+</script>
+</body>
+</html>

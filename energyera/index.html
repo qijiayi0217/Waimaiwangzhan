@@ -1,0 +1,29 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div style="background: ;opacity: 1"><center>
+<h1 class="display-3" style="color:#0061AA;  "> Welcome to ENGERA Database System </h1></center>
+<h3> Please select your identity below:</h3>
+<center>
+<button style="width:500px" class="btn btn-lg btn-primary btn-block" type="button" onclick="javascript:window.location.href='user/index.php'">I am a User</button>
+<button style="width:500px" onclick="auth()" href="javascript:void(0);" type="button" class="btn btn-lg btn-primary btn-block">I am an administrator</button></center><br></div><div style="background:url(image/bg.png) no-repeat;background-size:100% 100%;; min-height: 80%; height: 70%"></div>
+<script>
+    function auth() {
+        var passwd = window.prompt("Please type your password\nhint: admin", "");
+        if (passwd === "admin") {
+            window.location.replace("admin/index.html")
+        }
+        else if (passwd === "" || passwd === null) {}
+        else {
+            window.alert("invalid password!");
+        }
+    }
+</script>
+</body>
+</html>

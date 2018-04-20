@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign up</title>
+	<script type="text/javascript" src='login.js'></script>
+	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			console.log("script loaded...");
+			$('#signup_button').click(checkpasswd);
+		})
+		var checkpasswd=function(){
+			var $userID=$('#userID').val();
+			var $password=$('#passwd').val();
+			var $usertype=$('#type').val();
+			var $phone=$('#phone').val();
+			var $email=$('#email').val();
+			var $postcode=$('#postcode').val();
+			var $address=$('#address').val();
+			var $first=$('#first').val();
+			var $last=$('#last').val();
+			var $rname=$('#rname').val();
+			$.ajax({
+				url: 'http://localhost/waimaiwangzhan/post_login_pages/signup.php',
+				data:{
+					userID: $userID,
+					password: $password,
+					usertype: $usertype,
+					phone: $phone,
+					email: $email,
+					postcode: $postcode,
+					address: $address,
+					first: $first,
+					last: $last,
+					rname: $rname
+				},
+				type: "POST",
+				dataType: "json",
+				success: function(data){
+					console.log('success!');
+					alert("successfully registered!")
+					window.location.href="http://localhost/waimaiwangzhan/";
+				},
+				error: function(data){
+					console.log("error!");
+					console.log(data);
+					$('#password').val('');
+					var response=document.getElementById("response");
+					response.innerHTML="<a style='color:red'>UserID exists!</a>";
+				}
+			});
+		}
+	</script>
+</head>
+<body><br><br><br>
+	<center><div style="border:1px solid white;box-shadow: 10px 0px 10px #888888; width:350px;height:430px;">
+	<h1 style="WIDTH: 200px; color: #FF4500">Sign up!</h1>
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr>
+				<td>UserID:</td> 
+		<td><input type="text" name="userID" id="userID"></td>
+			</tr>
+			<tr>
+			<td>Password: </td>
+			<td><input type="password" name="passwd" id="passwd"></td>
+		</tr>
+		<tr>
+			<td>User Type: </td>
+			<td><select name="type" id="type">
+			<option value="Customer">Customer</option>
+			<option value="Restaurant">Restaurant Owner</option>
+		</select></td>
+	 	</tr>
+	 	<tr>
+	 		<td>Phone:</td>
+	 		<td><input type="text" name="phone" id="phone"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>E-mail:</td>
+	 		<td><input type="text" name="email" id="email"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>Postcode:</td>
+	 		<td><input type="text" name="postcode" id="postcode"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>Address:</td>
+	 		<td><input type="text" name="address" id="address"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>First Name:</td>
+	 		<td><input type="text" name="first" id="first"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>Last Name:</td>
+	 		<td><input type="text" name="last" id="last"></td>
+	 	</tr>
+	 	<tr>
+	 		<td>Restaurant Name:</td>
+	 		<td><input type="text" name="rname" id="rname"></td>
+	 	</tr>
+	 	<tr>
+	 		<td><button type="button" onclick="javascript: window.location.href='http://localhost/waimaiwangzhan/'">Login</button></td>
+	 		<td>
+	 	<button type="button" id="signup_button">Submit</button></td>
+	 </tr>
+	
+</table>
+<div id="response"></div>
+	</div></center>
+</body>
+</html>
